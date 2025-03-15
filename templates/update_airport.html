@@ -1,0 +1,39 @@
+{% include 'top.html' %}
+<div class="content">
+    <div class="container my-4">
+
+        <h2 class="title"> Update Aiport </h2>
+
+        <form class="needs-validation" method="POST" action="{{url_for('update_airport', airportid=airport.get('airportid', ''))}}" novalidate>
+
+
+            <div class="form-group">
+                <label for="name">Airport Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{airport.get('name', '')}}" placeholder="Enter Airport name here" required>
+                <div class="invalid-feedback">Please enter a Airport name.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="iatacode">IATA Code (e.g: CAN):</label>
+                <input type="text" class="form-control" id="iatacode" name="iatacode" value="{{airport.get('iatacode', '')}}" placeholder="Enter IATACODE here" required>
+                <div class="invalid-feedback">Please enter a IATA Code.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city" name="city" value="{{airport.get('city', '')}}" placeholder="Enter city here" required>
+                <div class="invalid-feedback">Please enter a city.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" class="form-control" id="country" name="country" value="{{airport.get('country', '')}}" placeholder="Enter country here" required>
+                <div class="invalid-feedback">Please enter a country.</div>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Confirm</button>
+        </form>
+
+    </div>
+</div>
+{% include 'end.html' %}

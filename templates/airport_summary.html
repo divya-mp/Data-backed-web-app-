@@ -1,0 +1,48 @@
+{% include 'top.html' %}
+
+<div id="content" class="container my-4">
+    <h1 class="page-title">{{ page.get('title', 'Airport') }}</h1>
+
+    <div class="mb-3">
+        <label for="sum" class="form-label">Sort by:</label>
+        <select class="form-select" id="sum" name="sum" onchange="location = this.value;">
+            <option disabled selected>Select Sorting Option</option>
+            <option value="{{ url_for('airport_summary_city', page_no=1) }}">Sort by city</option>
+            <option value="{{ url_for('airport_summary', page_no=1) }}">Sort by country</option>
+        </select>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% if session['isadmin'] %}
+                    <th>Country</th>
+                    <th>Number of Airports</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in airports %}
+                <tr class="align-items-center">
+                    {% if session['isadmin'] %}
+                        <td class="align-middle">
+                            {{ item['country'] }}
+                        </td>
+                        <td class="align-middle">{{ item['count'] }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between my-2">
+        {% if page_no > 1 %}
+            <a href="{{ url_for('airport_summary', page_no=page_no-1) }}" class="btn btn-secondary">Previous</a>
+        {% endif %}
+        <span>Page {{ page_no }} of {{ total }}</span>
+        {% if page_no < total %}
+             <a href="{{ url_for('airport_summary', page_no=page_no+1) }}" class="btn btn-secondary">Next</a> 
+        {% endif %}
+    </div>
+</div>
+{% include 'end.html' %}
